@@ -153,7 +153,7 @@ async function certainIndex() {
 }
 
 async function selectSet() { //note, take note of first item in set and last item in set, find their indexes in master list, slice accordingly
-    var response = await fetch('writer/words.txt'); //looks at words.txt 
+    var response = await fetch('../writer/words.txt'); //looks at words.txt 
     const words = await response.text(); //words.txt as a big string
     const list = words.split("\n"); //words.txt as an array whereas each line is an entry
     
