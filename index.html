@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>퀴즈레트 | Gamemodes</title>
+  <link rel="shortcut icon" href="/img/izone.ico" />
+  <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+  <link href="/css/file.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body onload="start()" onresize="resize()">
+  <div class="navbar">
+    <a href="html/home.html"><img class="nav-logo" src="/img/izone.png"></a>
+    <a class="nav-link" href="index.html">Sets</a>
+    <a class="nav-link" href="html/file.html">File</a>
+    <a class="nav-link" href="">Extra</a>
+    <a class="nav-link" href="">Sources</a>
+    <div class="nav-right">
+        <a href="" class="nav-link right">About</a>
+    </div>
+    <div class="navbar-bottom"></div>
+  </div>
+  
+  <div class="gm-all">
+    <img src="/img/caretRight.svg" class="gm-arrow rotate-close" onclick="dropdown(event)"/>
+
+    <div class="gm-wrapper">
+        <button class="gm-title" onclick="select(event)">All Words</button> <!-- ALL WORDS ALL WORDS ALL WORDS ALL WORDS ALL WORDS ALL WORDS -->
+        <div class="gm-content">
+            <div class="gm-term-count"></div>
+            <div class="gm-content-desc">
+                "All Words" as the name entails uses every word from the chosen file. From beginning to end, the default words.txt file provides hundreds of terms and definitions. A word that's already been solved won't ever appear again, but it's definition might. No word ever reappears but other words might have similar or same definitions (ex. <span style="font-family:Noto Serif KR; font-size: 21px;">같이</span> vs. <span style="font-family:Noto Serif KR; font-size: 21px;">함께</span> both meaning 'together')
+            </div>
+            
+            <button class="gm-start-button" id="allWords" onclick="setGamemode(event)">시작</button> <!-- another button to add on bottom could be timer, some speed mode, customize time after correct answer (all to fill up space) -->
+        </div>
+        <hr>
+        <button class="gm-title" onclick="select(event)">Certain Index</button> <!-- CERTAIN INDEX CERTAIN INDEX CERTAIN INDEX CERTAIN INDEX -->
+        <div class="gm-content">
+            <div class="gm-content-desc">
+                "Certain Index" takes a starting and ending index from the user given that the two text fields are filed in. These indicies will be used to put all words in between them into a set to be tested on. If your starting index is 50 and your ending index is 100, you will be tested on terms 50-100. The minimum amount of terms you need is 4.
+            </div>
+
+            <input type="text" class="indexRange" minlength="1" maxlength="3" min="0" placeholder="10">
+            <input type="text" class="indexRange" minlength="1" maxlength="3" min="0" placeholder="29">
+            <br>
+            <button class="gm-start-button" id="certainIndex" onclick="setGamemode(event)">시작</button>
+        </div>
+        <hr>
+        <button class="gm-title" onclick="select(event)">Sets</button> <!-- SETS SETS SETS SETS SETS SETS SETS SETS SETS SETS SETS SETS SETS -->
+        <div class="gm-content">
+            <div class="gm-content-desc">
+                "Sets" uses the predetermined sets of the given text file. The text file must follow the default format in order for this gamemode and possible other functions in the app to be used properly. The sets are divded by their titles, given that they don't have a '-' in them. You can view your text file yourself or on the "File" page. All sets must have a minimum of 4 terms. 
+            </div>
+            
+            <select id="gm-dropdown-menu"></select>
+            <br>
+            <button class="gm-start-button" id="sets" onclick="setGamemode(event)">시작</button>
+        </div>
+        <hr>
+        <button class="gm-title" onclick="select(event)">Random X</button> <!-- RANDOM RANDOM RANDOM RANDOM RANDOM RANDOM RANDOM RANDOM RANDOM-->
+        <div class="gm-content">
+            <div class="gm-content-desc">
+                "Random X" takes an x amount of terms decided by the user and creates a set out of them. Similar to "All Words" but the amount of terms is simply limited. The x terms will be randomized in order of appearance as all other gamemodes are. The minimum amount of terms needed is also 4.
+            </div>
+            
+            <input type="text" class="indexRange" minlength="1" maxlength="3" min="0" placeholder="22"> 
+            <br>
+            <button class="gm-start-button" id="randomX" onclick="setGamemode(event)">시작</button>
+        </div>
+        <hr>
+    </div>
+  </div>
+
+  <div class="card-all">
+    <div class="wrapper" id="card">
+        <div id="main-word"><span onmouseup="openNaver(event)" id="main-word-text"></span></div>
+        <div onclick="checkAnswer(event)" class="answers">
+            <button class="btn"></button>
+            <button class="btn"></button>
+            <button class="btn"></button>
+            <button class="btn"></button>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <hr class="card-progress">
+      </div>
+  </div>
+  
+
+  
+
+  <div class="dubbie-div">
+        <span class="dubbie-title top">CONGRATULATIONS!</span>
+        <img src="/img/winter happy.gif" class="dubbie-gif">
+        <span class="dubbie-title bot">YOU DID IT!</span>
+        <div style="width: max-content; margin: auto;"> <!-- Wrapping dubbie-direct in a div to avoid weird selection on the side thing (big hitbox), is there an easier way than this? This note shall stay here for as long as i dont have a proper solution-->
+            <span onclick="reviewContent(event)" class="dubbie-direct main">Click here to review your session!</span>
+        </div>
+
+        <div class="dubbie-review"> 
+            <div class="text" style="margin-bottom: 40px;"></div>
+            <div class="dubbie-end">
+                <span onclick="returnToGM()" class="dubbie-direct">Return to Gamemode Selection</span>
+                <span onclick="retrySet()" class="dubbie-direct">Retry?</span>
+                <br>
+            </div>
+            <!-- So here I want to list off all the words in order of appearance, and on the right side of the encasement theres an indicator of how well they knew the word based on how many tries it took them to  get it right. Initially I could have a number indicator of 1-4 indicating how many tries it took, but i want to viusualize it through little pill-sized bars that get filled or not based on the users peformance. It looks exacly like those password strength indicators. If done in first try then first bar is filled in green while the others are their normal grayish-whitish selves. If 2 then make first 2 bars yellow, 3 first 3 bars red, 4 make all bars somewhat of a crimson/blood/deep red, a dangerous dark shade of red showing the user is in the danger zone. -->
+    
+            <!-- At the bottom of the encasement there are two options: Return to Gamemode Selection (or home later) and Retry Set. Return to gamemdoe selection simply sends you back to gamemode selection with an animation rather than a page reload because i'd like to incorporate smooth transitions into my website more rather than popping things up outta nowhere. Retry set will prompt a fade in span and 4 checkboxes that asksy you the question "Which level of words would you like to retry?" (or something along the lines of that) where you check which difficulty of words you'd like to try again. For instance, if i only check off 3 and 4 ill only try the words i had a hard time on, prompting the program to make a new list with words that received a 3 and 4 in score. I'll have to make a 3rd array during the program that is the same length as newTerms/newDef, where the difficulty of each word is stored there, make sure when i do this i take in account for the clicking of answers after the correct one is already chosen, that'll be easy to deal with though. After choosing your retry words it transitions into the card again and you get sent right back into the game. Since i'm not reloading with this idea i might need to reset the elements and sets behind the scenes but idk if thats a problem yet. -->
+      </div>
+  </div>
+
+  <script src="/js/script.js"></script>
+  <script src="/js/celebrate.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  
+
+</body>
+
+</html> 
+<!-- SEE ALL NOTE REFERENCES IN FOOTNOTES.TXT -->
