@@ -1,5 +1,5 @@
 async function printText() {
-    var response = await fetch('/writer/words.txt');
+    var response = await fetch('../writer/words.txt');
     const t = await response.text();
     
     const text = document.getElementsByClassName("text")[0];
