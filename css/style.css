@@ -1,0 +1,542 @@
+@import url(https://fonts.googleapis.com/css?family=Noto%20Serif);
+@import url(https://fonts.googleapis.com/css?family=Noto%20Serif%20KR);
+@import url(https://fonts.googleapis.com/css?family=Lexend%20Deca);
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    /* overflow: hidden; */
+    /* height: 100%; */
+}
+
+:root {
+    --font: "Lexend Deca";
+    --kor: "Noto Serif KR";
+    --izone: #ef539d;
+}
+
+body::-ms-expand {
+    display: none; /* Hide the default arrow on Internet Explorer */
+}
+
+body::-webkit-scrollbar {
+    /* display: none; */
+    width: 13px; /* Set the width of the scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #1c2333; /* Set the background color of the scrollbar track */
+    border-left: 2px solid #384156;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #384156; 
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #4f5566; 
+}
+
+body::-webkit-scrollbar-thumb:active {
+    background-color: #686d7a; 
+}
+
+body {
+    background-color: #0e1525;
+    margin: 0;
+    font-family: var(--font); 
+    overscroll-behavior-y: none;
+
+    /* height: 100%; */
+    /* overflow: auto; */
+}
+  
+/* NAVIGATION BAR */
+.navbar {
+    background-color: #1c2333;
+    border-bottom: 2px solid var(--izone);
+    overflow: hidden;
+    top: 0;
+    position: sticky;
+    width: 100%;
+    z-index: 10;
+    display: block;
+    user-select: none;
+}
+
+.navbar-bottom {
+    border-bottom: 2px solid #384156;
+    width: 100%;
+    position: sticky;
+    z-index: 9;
+    top: 61px;
+    /* right: 13px; */
+}
+
+.nav-logo {
+    float: left;
+    height: 50px;
+    padding: 4px 10px 0px 15px;
+}
+
+.nav-link {
+    float: left;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
+    padding: 14px 16px;
+    transition: text-shadow 0.25s ease-out;
+}
+
+.nav-link:hover {
+    text-shadow: 0px 0px 10px var(--izone);
+}
+
+.nav-right {
+    float: right;
+    font-weight: bold;
+}
+
+
+/* CARD AND BUTTONS */
+.wrapper {
+    background-color: #1c2333;
+    border-radius: 10px;
+    color: #FFF;
+    padding: 20px;
+    box-shadow: 0px 0px 10px #384156;
+    width: 54%; /* 860px */
+    height: 490px; /* 490px */
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.progress-container {
+    box-sizing: border-box;
+    width: max-content;
+}
+
+.card-progress {
+    display: none;
+    margin-top: 20px;
+    width: 806px; /* 806px */
+    border: 7px solid var(--izone);
+    border-radius: 10px;
+    position: relative;
+}
+
+#card {
+    display: none;
+}
+
+#main-word {
+    font-size: 38px;
+    height: 50%;
+    display: flex; /* lets me align i guess? makes it 'flexible'*/
+    align-items: center; /* x align */
+    justify-content: center; /* y align */
+    font-family: var(--kor);
+}
+
+#main-word-text {
+    cursor: pointer;
+}
+
+.answers {
+    display: grid;
+    grid-template-columns: 49% 49%;
+    justify-content: space-between;
+    gap: 10px;
+    height: 50%;
+    margin-bottom: 10px;
+}
+
+.btn {
+    background-color: inherit;
+    border: 1px solid #384156;
+    border-radius: 10px;
+    color: #FFF;
+    font-size: 18px;
+    font-family: var(--font);
+    cursor: pointer;
+}
+
+@keyframes correct {
+  to {border: 1px solid #4dbd4d;}
+}
+
+@keyframes incorrect {
+  to {border: 1px solid #d45448;}
+}
+
+
+/* GAMEMODE SELECTOR GAMEMODE SELECTOR */
+.gm-all {
+    position: relative;
+    /* left: 1300px; */
+}
+
+.gm-wrapper {
+    display: block; /* BLOCK */
+    width: 54%; /* 860px */
+    box-sizing: border-box;
+    margin: auto;
+    color: #fff;
+    /* text-align: center; */
+    box-shadow: 0px 0px 10px #384156;
+    border-radius: 10px;
+    background-color: #1c2333;
+    position: relative;
+    bottom: 45px;
+    
+    /* stink */
+    /* left: 1350px;  */
+}
+
+.gm-wrapper hr {
+    border: 1px solid #384156;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 94%;
+}
+
+.gm-wrapper hr:last-child {
+    border: none;
+}
+
+.gm-title {
+    font-family: var(--font);
+    font-size: 30px;
+    font-weight: bold;
+    background-color: #1c2333;
+    color: var(--izone);
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+    user-select: none;
+}
+
+.gm-title:first-child { /* The first gm-title "All Words" gets 20px of margin on top */
+    margin-top: 20px;
+}
+
+.gm-content {
+    text-align: center;
+    background-color: #1c2333;
+    font-size: 20px;
+    padding: 0px 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease-out;
+}
+
+.gm-content-desc {
+    margin: 0px 30px;
+}
+
+.gm-content button {
+    cursor: pointer;
+}
+
+/* GAMEMODE COLLAPSE ALL OPEN ALL ARROW */
+.gm-arrow {
+    display: none; /* BLOCK */
+    transition: transform 0.2s linear;
+    cursor: pointer;
+    position: relative;
+    top: 85px;
+    user-select: none;
+}
+
+.rotate-close {
+    transform: rotate(0deg);
+}
+
+.rotate-open {
+    transform: rotate(90deg);
+}
+
+.test {
+    margin: auto;
+    /* border-top: 2px solid var(--izone); */
+    border: 1px dotted red;
+    color: #fff;
+    /* display: flex;
+    justify-content: center; */
+}
+
+.wrap {
+    background-color: #1c2333;
+    border-radius: 10px;
+    color: #FFF;
+    /* padding: 20px; */
+    box-shadow: 0px 0px 10px #384156;
+    height: 490px; /* 490px */
+    box-sizing: border-box;
+    width: 860px;
+    margin-top: 80px;
+    position: relative;
+    right: 20px;
+}
+
+
+/* ALL WORDS ALL WORDS ALL WORDS */
+.gm-term-count {
+    font-size: 25px;
+}
+
+/* CERTAIN INDEX CERTAIN INDEX */
+.indexRange {
+    color: #fff;
+    background-color: #384156;
+    font-family: var(--font);
+    font-size: 30px;
+    width: 60px;
+    text-align: center;
+    border: none;
+    margin: 8px 1px 0px 1px;
+}
+
+/* SETS SETS SETS SETS SETS SETS */
+#gm-dropdown-menu {
+    background-color: #1c2333;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 21px;
+    margin-top: 8px;
+    font-family: var(--kor);
+    border-radius: 10px;
+    padding-bottom: 3px;
+    text-align: center;
+}
+
+select::-ms-expand {
+    display: none; /* Hide the default arrow on Internet Explorer */
+}
+
+select::-webkit-scrollbar {
+    width: 8px; /* Set the width of the scrollbar */
+}
+
+select::-webkit-scrollbar-track {
+    background-color: #fff; /* Set the background color of the scrollbar track */
+}
+
+select::-webkit-scrollbar-thumb:hover {
+    background-color: #384156; /* Set the color of the scrollbar thumb on hover */
+}
+
+#gm-dropdown-menu option {
+    font-weight: bold;
+}
+
+.gm-start-button {
+    border: 0px;
+    border-radius: 10px;
+    background-color: #4dbd4d;
+    color: #fff;
+    font-size: 30px;
+    font-family: var(--kor);
+    margin-top: 10px;
+    transition: color 0.25s ease-out;
+    transition: background-color 0.25s ease-out;
+
+    &:hover {
+        background-color: #fff;
+        color: #4dbd4d;
+    }
+}
+
+
+
+/* Dubbie Screen Stuff */
+.dubbie-div {
+    display: none; /* NONE */
+    margin: auto;
+    margin-top: 35px;
+}
+
+.dubbie-title {
+    display: block;
+    text-align: center;
+    color: var(--izone);
+    font-size: 90px;
+    font-weight: bold;
+    position: relative;
+    opacity: 0;
+    
+    &.top {
+        bottom: 100px;
+        animation: topTextDub 1000ms ease forwards;
+    }
+
+    &.bot {
+        top: 100px;
+        animation: botTextDub 1000ms ease forwards 2s;
+    }
+}
+
+.dubbie-gif {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 33%;
+    border: 10px solid var(--izone);
+    opacity: 0;
+    animation: dubbieGif 1000ms ease forwards 1s;
+}
+
+.dubbie-direct {
+    color: var(--izone);
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 25px;
+    text-decoration: none;
+    transition: color 0.25s ease-out;
+
+    &.main {
+        opacity: 0;
+        animation: dubbieLink 1200ms ease forwards 3s;
+    }
+}
+
+.dubbie-review {
+    display: none;
+    margin: auto;
+}
+
+.dubbie-direct:hover {
+    color: #e7bcd0;
+    cursor: pointer;
+}
+
+.dubbie-end {
+    display: block;
+    margin: auto;
+    width: max-content;
+}
+
+/* Dubbie Animations */
+@keyframes topTextDub {
+    to { transform: translateY(100px); opacity: 1;}
+}
+
+@keyframes dubbieGif {
+    from { transform: scale(0.4);}
+    to { transform: scale(1.0); opacity: 1;}
+}
+
+@keyframes botTextDub {
+    to { transform: translateY(-100px); opacity: 1; }
+}
+
+@keyframes dubbieLink {
+    to { opacity: 1; }
+}
+
+/* Transition Animations */
+@keyframes exitLeft {
+    to { transform: translateX(-1400px); opacity: 0; }
+}
+
+@keyframes enterRight {
+    to { transform: translateX(-1300px); opacity: 1; }
+}
+
+
+/* SCREEN SIZE DIFFERENCES */
+@media screen and (min-width: 1600px) { /* PC (1920) */
+    .wrapper {
+        width: 860px;
+        margin-top: 80px;
+    }
+
+    .gm-wrapper {
+        width: 860px;
+        margin-top: 80px;
+    }
+
+    .dubbie-title {
+        font-size: 80px;
+    }
+
+    .dubbie-gif {
+        width: 30%;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+}
+
+@media screen and (min-width: 1920px) { /* For some main monitor adjustments, making things bigger and the like */
+    .dubbie-title {
+        font-size: 90px;
+    }
+    
+    .dubbie-gif {
+        width: 33%;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1599px) { /* Chromebook (1365)/Not Main PC Screen sizes and not mobile */
+    .wrapper {
+        width: 860px;
+        margin-top: 40px; /* I WAS WORKING OVER HERE, THIS VALUE IS USUALLY 40PX ... LATER EDIT MOVING IT BACK TO 40PX WAS 80*/
+    }
+
+    .gm-wrapper {
+        width: 860px;
+        margin-top: 80px;
+    }
+
+    .dubbie-div {
+        margin-top: 15px;
+    }
+
+    .dubbie-title {
+        font-size: 75px;
+    }
+
+    .dubbie-gif {
+        width: 30%;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+}
+
+@media screen and (max-width: 1200px) { /* Mobile Devices (I think? can always change it according to phone and tablet heights and widths later, not main focus) */
+    .wrapper {
+        width: 88%;
+        height: 500px;
+        margin-top: 40px;
+    }
+
+    .gm-wrapper {
+        width: 88%;
+        margin-top: 80px;
+    }
+
+    .navbarItem a {
+        font-size: 18px;
+        padding-top: 4px;
+    }
+}
+
+@media (pointer: fine) { /* if on PC */
+    .btn:hover {
+        border: 1px solid #bbbcbf;
+    }
+}
+
+@media (pointer: coarse) { /* if on mobile, basically there is no highlighting feature on mobile */
+    .btn:hover {
+        border: 1px solid #384156;
+    }
+}
