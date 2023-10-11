@@ -25,7 +25,7 @@ async function create() {
     resize(); // window.addEventListener('resize', onResize);
 
     //Creates set options for dropdown and pushes pairs into master arrays
-    var response = await fetch('/writer/words.txt');
+    var response = await fetch('../writer/words.txt');
     const words = await response.text();
     const list = words.split("\n");
 
